@@ -1,8 +1,11 @@
 package com.example.arist.kaeoh;
 
+import android.app.Fragment;
+import android.app.FragmentContainer;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentManager;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -23,15 +26,6 @@ public class Main extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
             this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -40,6 +34,10 @@ public class Main extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.content_main, new AccueilFragment())
+                .commit();
     }
 
     @Override
@@ -81,12 +79,16 @@ public class Main extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_Accueil) {
-            getFragmentManager().beginTransaction()
-                    .replace(R.id.content_main, new MainFragment())
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.content_main, new AccueilFragment())
                     .commit();
         }else if(id == R.id.nav_Raspberry){
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.content_main, new RaspberryFragment())
+                    .commit();
+        }else if(id == R.id.nav_Accueil2){
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.content_main, new AccueilFragment())
                     .commit();
         }
 

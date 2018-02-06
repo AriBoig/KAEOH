@@ -9,16 +9,15 @@ import android.view.View;
 import android.view.ViewGroup;
 
 /**
- * Created by arist on 23/11/2017.
+ * Created by arist on 06/02/2018.
  */
 
-public class MainFragment extends Fragment {
-    public MainFragment(){
-
+public class AccueilFragment extends android.support.v4.app.Fragment{
+    public AccueilFragment() {
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_main,container,false);
+        return inflater.inflate(R.layout.fragment_accueil,container,false);
 
     }
     public void onAttach(Context context) {

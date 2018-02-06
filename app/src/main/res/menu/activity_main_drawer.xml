@@ -12,6 +12,10 @@
             android:id="@+id/nav_Raspberry"
             android:icon="@drawable/ic_menu_share"
             android:title="Raspberrys" />
+        <item
+            android:id="@+id/nav_Accueil2"
+            android:icon="@drawable/ic_menu_share"
+            android:title="Accueil2" />
 
     </group>
 </menu>
