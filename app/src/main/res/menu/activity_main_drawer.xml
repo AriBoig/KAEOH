@@ -13,9 +13,9 @@
             android:icon="@drawable/ic_menu_share"
             android:title="Raspberrys" />
         <item
-            android:id="@+id/nav_Accueil2"
+            android:id="@+id/nav_Preferences"
             android:icon="@drawable/ic_menu_share"
-            android:title="Accueil2" />
+            android:title="Preferences" />
 
     </group>
 </menu>

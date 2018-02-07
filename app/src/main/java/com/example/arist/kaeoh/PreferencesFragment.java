@@ -1,28 +1,30 @@
 package com.example.arist.kaeoh;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 /**
- * Created by arist on 23/11/2017.
+ * Created by arist on 07/02/2018.
  */
 
-public class MainFragment extends Fragment {
-    public MainFragment(){
+public class PreferencesFragment extends Fragment {
+    public PreferencesFragment() {
 
     }
 
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_main,container,false);
+        return inflater.inflate(R.layout.fragment_preferences,container,false);
     }
 
+    @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        ((Activity)context).setTitle("Application KAEOH");
+        ((Activity)context).setTitle("Settings");
     }
 }

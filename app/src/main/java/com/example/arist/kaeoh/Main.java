@@ -86,9 +86,9 @@ public class Main extends AppCompatActivity
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.content_main, new RaspberryFragment())
                     .commit();
-        }else if(id == R.id.nav_Accueil2){
+        }else if(id == R.id.nav_Preferences){
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.content_main, new AccueilFragment())
+                    .replace(R.id.content_main, new ConnexionFragment())
                     .commit();
         }
 
