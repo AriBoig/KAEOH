@@ -2,6 +2,7 @@ package com.example.arist.kaeoh;
 
 import android.app.Fragment;
 import android.app.FragmentContainer;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -15,14 +16,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
-public class Main extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class Main extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
+    private Session session;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -57,6 +60,7 @@ public class Main extends AppCompatActivity
         return true;
     }
 
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -66,6 +70,15 @@ public class Main extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.content_main, SettingsFragment.newInstance())
+                    .commit();
+            return true;
+        }
+        else if (id == R.id.action_about){
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.content_main, AboutFragment.newInstance())
+                    .commit();
             return true;
         }
 
@@ -74,8 +87,11 @@ public class Main extends AppCompatActivity
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
+
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
+
+        session = new Session(getApplicationContext());
         int id = item.getItemId();
 
         if (id == R.id.nav_Accueil) {
@@ -83,13 +99,26 @@ public class Main extends AppCompatActivity
                     .replace(R.id.content_main, new AccueilFragment())
                     .commit();
         }else if(id == R.id.nav_Raspberry){
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.content_main, new RaspberryFragment())
-                    .commit();
-        }else if(id == R.id.nav_Preferences){
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.content_main, new ConnexionFragment())
-                    .commit();
+            if (session.getusername() != null) {
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.content_main, new RaspberryFragment())
+                        .commit();
+            }else{
+                Toast.makeText(getApplication().getApplicationContext(),"Vous devez vous connecter afin de poursuivre",Toast.LENGTH_SHORT).show();
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.content_main, new ConnexionFragment())
+                        .commit();
+            }
+        }else if(id == R.id.nav_Compte){
+            if (session.getusername() != null){
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.content_main, new CompteFragment())
+                        .commit();
+            }else {
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.content_main, new ConnexionFragment())
+                        .commit();
+            }
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

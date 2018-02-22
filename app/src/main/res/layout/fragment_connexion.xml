@@ -26,9 +26,9 @@
         android:layout_alignBottom="@+id/textView2"
         android:layout_alignLeft="@+id/editTextPassword"
         android:layout_alignStart="@+id/editTextPassword"
+        android:hint="exemple@gmail.com"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="exemple@gmail.com"
         tools:layout_editor_absoluteX="115dp"
         tools:layout_editor_absoluteY="137dp" />
 
@@ -70,8 +70,7 @@
         android:layout_toEndOf="@+id/textView4"
         android:layout_toRightOf="@+id/textView4"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="************"
+        android:inputType="textPassword"
         tools:layout_editor_absoluteX="115dp"
         tools:layout_editor_absoluteY="232dp" />
 

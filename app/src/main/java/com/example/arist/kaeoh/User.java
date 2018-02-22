@@ -5,20 +5,35 @@ package com.example.arist.kaeoh;
  */
 
 public class User {
-    private int uid;
-    private String username;
+    private int id;
+    private String name;
     private String email;
-    private String pwd;
+    private String password;
 
     public User() {
-
     }
 
-    public User(int uid, String username, String email, String pwd) {
-        this.uid = uid;
-        this.username = username;
+    public User(int id, String name, String email, String password) {
+        this.id = id;
+        this.name = name;
         this.email = email;
-        this.pwd = pwd;
+        this.password = password;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getEmail() {
@@ -29,27 +44,11 @@ public class User {
         this.email = email;
     }
 
-    public int getUid() {
-        return uid;
+    public String getPassword() {
+        return password;
     }
 
-    public void setUid(int uid) {
-        this.uid = uid;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPwd() {
-        return pwd;
-    }
-
-    public void setPwd(String pwd) {
-        this.pwd = pwd;
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

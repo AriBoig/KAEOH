@@ -2,6 +2,7 @@ package com.example.arist.kaeoh;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -20,22 +21,32 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import static android.content.Context.MODE_PRIVATE;
+
 /**
  * Created by arist on 07/02/2018.
  */
 
 public class ConnexionFragment extends Fragment {
+
+   private Session session;
     public ConnexionFragment() {
 
     }
     private static String[] userEmail;
     private static String[] userPassword;
+    private static String[] userName;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_connexion,container,false);
         Button button = (Button) v.findViewById(R.id.buttonConnexion);
 
+        session = new Session(getContext());
+
+        if (session.getusername() != null){
+            Toast.makeText(getActivity().getApplicationContext(),"Vous êtes déjà connecté sous le nom " + session.getusername(),Toast.LENGTH_SHORT).show();
+        }
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(KAEOHService.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -51,9 +62,11 @@ public class ConnexionFragment extends Fragment {
 
                 userEmail = new String[user.size()];
                 userPassword = new String[user.size()];
+                userName = new String[user.size()];
                 for (int i = 0; i < user.size(); i++) {
                     userEmail[i] = user.get(i).getEmail();
-                    userPassword[i] = user.get(i).getPwd();
+                    userPassword[i] = user.get(i).getPassword();
+                    userName[i] = user.get(i).getName();
                 }
                 
             }
@@ -72,8 +85,12 @@ public class ConnexionFragment extends Fragment {
                 String pswd = pswdText.getText().toString();
                 if(compare(email,userEmail)&& compare(pswd,userPassword)){
                     Toast.makeText(getActivity().getApplicationContext(),"Connexion réussie",Toast.LENGTH_SHORT).show();
+                    session.setusername(String.valueOf(recupName(email,userEmail,userName)));
+                    getFragmentManager().beginTransaction()
+                            .replace(R.id.content_main, new CompteFragment())
+                            .commit();
                 }else{
-                    Toast.makeText(getActivity().getApplicationContext(),email,Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity().getApplicationContext(),"Impossible de se connecter. Email ou mot de passe incorrect",Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -93,6 +110,15 @@ public class ConnexionFragment extends Fragment {
             }
         }
         return false;
+    }
+
+    private String recupName(String compare, String list1[], String list2[]){
+        for (int i = 0; i < list1.length; i++) {
+            if(compare.equals(list1[i])){
+                return list2[i];
+            }
+        }
+        return "no name";
     }
 
 }
