@@ -75,7 +75,7 @@ public class BaseDeDonnees extends SQLiteOpenHelper {
         while(!res.isAfterLast()){
             Raspberry r = new Raspberry();
             r.setName(res.getString(0));
-            r.setIp(res.getString(1));
+            //r.setIp(res.getString(1));
             liste.add(r);
             res.moveToNext();
         }

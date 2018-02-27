@@ -23,16 +23,22 @@ import static android.content.ContentValues.TAG;
 public class Raspberry{
     private int id;
     private String name;
-    private String ip;
+    private int user_id;
+    private int tag_id;
+    private String added;
+    private String last_com;
 
-    public Raspberry(){
+    public Raspberry() {
 
     }
 
-    public Raspberry(int id, String name, String ip) {
+    public Raspberry(int id, String name, int user_id, int tag_id, String added, String last_com) {
         this.id = id;
         this.name = name;
-        this.ip = ip;
+        this.user_id = user_id;
+        this.tag_id = tag_id;
+        this.added = added;
+        this.last_com = last_com;
     }
 
     public int getId() {
@@ -51,11 +57,35 @@ public class Raspberry{
         this.name = name;
     }
 
-    public String getIp() {
-        return ip;
+    public int getUser_id() {
+        return user_id;
     }
 
-    public void setIp(String ip) {
-        this.ip = ip;
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
+    }
+
+    public int getTag_id() {
+        return tag_id;
+    }
+
+    public void setTag_id(int tag_id) {
+        this.tag_id = tag_id;
+    }
+
+    public String getAdded() {
+        return added;
+    }
+
+    public void setAdded(String added) {
+        this.added = added;
+    }
+
+    public String getLast_com() {
+        return last_com;
+    }
+
+    public void setLast_com(String last_com) {
+        this.last_com = last_com;
     }
 }

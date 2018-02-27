@@ -19,12 +19,12 @@ public class Session {
         prefs.edit().putString("username", username).commit();
     }
 
-    public void setconnected(Boolean connect){
-        prefs.edit().putBoolean("connected",connect).commit();
+    public void setIdUser(Integer id){
+        prefs.edit().putInt("id",id).commit();
     }
-    public boolean getconnected(){
-        Boolean connect = prefs.getBoolean("connected",false);
-        return connect;
+    public int getIdUser(){
+        Integer idUser = prefs.getInt("idUser",0);
+        return idUser;
     }
     public String getusername() {
         String usename = prefs.getString("username",null);

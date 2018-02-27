@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import java.util.List;
 
 /**
@@ -19,6 +21,11 @@ public class AdaptateurRaspberry extends ArrayAdapter<Raspberry>{
     public AdaptateurRaspberry(Context context, List<Raspberry> raspberry) {
         super(context, 0, raspberry);
     }
+    private class RaspViewHolder{
+        public TextView name;
+        public TextView added;
+        public TextView last_com;
+    }
 
     public View getView(int position, View convertView, ViewGroup parent){
 
@@ -29,8 +36,8 @@ public class AdaptateurRaspberry extends ArrayAdapter<Raspberry>{
         if(viewHolder == null){
             viewHolder = new RaspViewHolder();
             viewHolder.name = (TextView) convertView.findViewById(R.id.raspberry);
-            viewHolder.ip= (TextView) convertView.findViewById(R.id.rasp_ip);
-
+            viewHolder.added = (TextView) convertView.findViewById(R.id.rasp_date_ajout);
+            viewHolder.last_com = (TextView) convertView.findViewById(R.id.rasp_last_com);
             convertView.setTag(viewHolder);
         }
 
@@ -39,13 +46,8 @@ public class AdaptateurRaspberry extends ArrayAdapter<Raspberry>{
 
         //il ne reste plus qu'à remplir notre vue
         viewHolder.name.setText(raspberry.getName());
-        viewHolder.ip.setText(raspberry.getIp());
-
+        viewHolder.added.setText(raspberry.getAdded());
+        viewHolder.last_com.setText(raspberry.getLast_com());
         return convertView;
     }
-    private class RaspViewHolder{
-        public TextView name;
-        public TextView ip;
-    }
-
 }

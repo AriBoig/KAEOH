@@ -13,6 +13,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 import retrofit2.Call;
@@ -22,6 +24,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import static android.content.Context.MODE_PRIVATE;
+import static java.security.spec.MGF1ParameterSpec.SHA1;
 
 /**
  * Created by arist on 07/02/2018.
@@ -36,6 +39,7 @@ public class ConnexionFragment extends Fragment {
     private static String[] userEmail;
     private static String[] userPassword;
     private static String[] userName;
+    private static int[] userId;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -63,10 +67,12 @@ public class ConnexionFragment extends Fragment {
                 userEmail = new String[user.size()];
                 userPassword = new String[user.size()];
                 userName = new String[user.size()];
+                userId = new int[user.size()];
                 for (int i = 0; i < user.size(); i++) {
                     userEmail[i] = user.get(i).getEmail();
                     userPassword[i] = user.get(i).getPassword();
                     userName[i] = user.get(i).getName();
+                    userId[i] = user.get(i).getId();
                 }
                 
             }
@@ -83,14 +89,22 @@ public class ConnexionFragment extends Fragment {
                 EditText pswdText = (EditText)getActivity().findViewById(R.id.editTextPassword);
                 String email = emailText.getText().toString();
                 String pswd = pswdText.getText().toString();
-                if(compare(email,userEmail)&& compare(pswd,userPassword)){
-                    Toast.makeText(getActivity().getApplicationContext(),"Connexion réussie",Toast.LENGTH_SHORT).show();
-                    session.setusername(String.valueOf(recupName(email,userEmail,userName)));
-                    getFragmentManager().beginTransaction()
-                            .replace(R.id.content_main, new CompteFragment())
-                            .commit();
-                }else{
-                    Toast.makeText(getActivity().getApplicationContext(),"Impossible de se connecter. Email ou mot de passe incorrect",Toast.LENGTH_SHORT).show();
+
+                try {
+                    if(compareEmail(email,userEmail)&& comparePassword(pswd,userPassword)){
+                        Toast.makeText(getActivity().getApplicationContext(),"Connexion réussie",Toast.LENGTH_SHORT).show();
+                        session.setusername(String.valueOf(recupName(email,userEmail,userName)));
+                        session.setIdUser(recupId(email,userEmail,userId));
+                        getFragmentManager().beginTransaction()
+                                .replace(R.id.content_main, new CompteFragment())
+                                .commit();
+                    }else{
+                        Toast.makeText(getActivity().getApplicationContext(),"Impossible de se connecter. Email ou mot de passe incorrect",Toast.LENGTH_SHORT).show();
+                    }
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                } catch (NoSuchAlgorithmException e) {
+                    e.printStackTrace();
                 }
             }
         });
@@ -103,9 +117,20 @@ public class ConnexionFragment extends Fragment {
     }
 
     private static final String TAG = "MyActivity";
-    private boolean compare(String compare,String list[]){
+    private boolean compareEmail(String compare,String list[]){
         for (int i = 0; i < list.length; i++) {
             if(compare.equals(list[i])){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean comparePassword(String compare,String list[]) throws UnsupportedEncodingException, NoSuchAlgorithmException {
+        String test;
+        for (int i = 0; i < list.length; i++) {
+            test = StringEncryption.SHA1(compare);
+            if(test.equals(list[i])){
                 return true;
             }
         }
@@ -121,4 +146,12 @@ public class ConnexionFragment extends Fragment {
         return "no name";
     }
 
+    private int recupId(String compare, String list1[], int list2[]){
+        for (int i = 0; i < list1.length; i++) {
+            if(compare.equals(list1[i])){
+                return list2[i];
+            }
+        }
+        return 0;
+    }
 }
