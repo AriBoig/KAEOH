@@ -13,6 +13,10 @@
             android:icon="@drawable/ic_menu_share"
             android:title="Raspberrys" />
         <item
+            android:id="@+id/nav_Esp"
+            android:icon="@drawable/ic_menu_share"
+            android:title="Esps" />
+        <item
             android:id="@+id/nav_Compte"
             android:icon="@drawable/ic_menu_share"
             android:title="Compte" />

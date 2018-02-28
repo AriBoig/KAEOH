@@ -30,10 +30,11 @@
         android:id="@+id/compte_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/compte_name_text"
         android:layout_alignBottom="@+id/compte_name_text"
-        android:layout_alignEnd="@+id/imageView2"
-        android:layout_alignRight="@+id/imageView2"
-        android:text="TextView"
+        android:layout_toEndOf="@+id/compte_name_text"
+        android:layout_toRightOf="@+id/compte_name_text"
+        android:text="TextViewJeanClaudeTest"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
 
     <Button

@@ -13,9 +13,12 @@ import retrofit2.http.GET;
 
 public interface KAEOHService{
     public static final String BASE_URL = "http://kaeoh.gearhostpreview.com/";
-    @GET("list.php")
+    @GET("rasp.php")
     retrofit2.Call<List<Raspberry>> getRasp();
 
     @GET("users.php")
     retrofit2.Call<List<User>> getUser();
+
+    @GET("esps.php")
+    retrofit2.Call<List<ESP>> getEsps();
 }

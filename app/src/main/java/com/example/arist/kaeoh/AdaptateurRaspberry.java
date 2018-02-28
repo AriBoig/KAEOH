@@ -44,7 +44,7 @@ public class AdaptateurRaspberry extends ArrayAdapter<Raspberry>{
         //getItem(position) va récupérer l'item [position] de la List<Prods> prods
         Raspberry raspberry = getItem(position);
 
-        //il ne reste plus qu'à remplir notre vue
+        //Remplissage de la vue
         viewHolder.name.setText(raspberry.getName());
         viewHolder.added.setText(raspberry.getAdded());
         viewHolder.last_com.setText(raspberry.getLast_com());

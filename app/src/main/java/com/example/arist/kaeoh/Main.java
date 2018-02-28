@@ -109,6 +109,17 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
                         .replace(R.id.content_main, new ConnexionFragment())
                         .commit();
             }
+        }else if(id == R.id.nav_Esp){
+            if (session.getusername() != null) {
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.content_main, new ESPFragment())
+                        .commit();
+            }else{
+                Toast.makeText(getApplication().getApplicationContext(),"Vous devez vous connecter afin de poursuivre",Toast.LENGTH_SHORT).show();
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.content_main, new ConnexionFragment())
+                        .commit();
+            }
         }else if(id == R.id.nav_Compte){
             if (session.getusername() != null){
                 getSupportFragmentManager().beginTransaction()

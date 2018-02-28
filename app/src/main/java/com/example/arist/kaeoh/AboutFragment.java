@@ -23,7 +23,7 @@ public class AboutFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_about, container, false);
         setHasOptionsMenu(true);
-        String textAbout = "KAEOH is an application made by Timothé TOUDIC and Aristide BOISGONTIER. You can contact us on kaeoh@gmail.com";
+        String textAbout = "KAEOH is an application made by Timothée TOUDIC and Aristide BOISGONTIER. You can contact us on kaeoh@gmail.com";
         text = v.findViewById(R.id.text_about);
         text.setText(textAbout);
         return v;
